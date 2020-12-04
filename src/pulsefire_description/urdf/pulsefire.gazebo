@@ -1,22 +1,6 @@
 <?xml version="1.0"?>
 <robot>
 
-  <!--gazebo reference="left_wheel_hinge">
-      <mu1 value="10000.0" />
-      <mu2 value="10000.0" />
-      <kp value="100000.0" />
-      <kd value="0.00001" />
-      <maxVel value="1.0" />
-      <minDepth value="0.0001" />
-  </gazebo>    
-  <gazebo reference="right_wheel_hinge">
-      <mu1 value="10000.0" />
-      <mu2 value="10000.0" />
-      <kp value="100000.0" />
-      <kd value="0.00001" />
-      <maxVel value="1.0" />
-      <minDepth value="0.0001" />
-  </gazebo-->    
 
   <gazebo>
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
@@ -32,6 +16,15 @@
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <robotBaseFrame>chassis</robotBaseFrame>
+      <publishOdomTF>true</publishOdomTF>
+      <rosDebugLevel>na</rosDebugLevel>
+      <publishWheelJointState>false</publishWheelJointState>
+      <publishWheelTF>false</publishWheelTF>
+      <publishWheelTF>false</publishWheelTF>
+      <wheelAcceleration>0</wheelAcceleration>
+      <wheelTorque>5</wheelTorque>
+      <odometrySource>world</odometrySource>
+      <publishTf>1</publishTf>
     </plugin>
   </gazebo>
 
@@ -113,7 +106,7 @@
         </noise>
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
-        <topicName>/scan</topicName>
+        <topicName>scan</topicName>
         <frameName>hokuyo</frameName>
       </plugin>
     </sensor>

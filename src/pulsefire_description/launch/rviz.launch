@@ -1,7 +1,9 @@
 <launch>
-  <arg name="scan_topic"  default="/scan" />
+  <arg name="scan_topic"  default="scan" />
   <arg name="base_frame"  default="chassis"/>
   <arg name="odom_frame"  default="odom"/>
+
+  <param name="/use_sime_time" value="false"/>
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find pulsefire_description)/launch/config.rviz"/>
     
@@ -46,22 +48,22 @@
 
   <!-- Map server -->
   <arg name="map_file" default="$(find pulsefire_description)/maps/test_map.yaml"/>
-  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/>
 
   <!-- Place map frame at odometry frame -->
-  <!-->node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
-      args="0 0 0 0 0 0 map odom 30"/-->
+  <!--node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="0 0 0 0 0 0 map odom 100"/-->
 
-  <!-->node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
+  <node pkg="turtlebot3_teleop" type="turtlebot3_teleop_key" name="turtlebot3_teleop_keyboard"  output="screen">
     <param name="scale_linear" value="0.5" type="double"/>
     <param name="scale_angular" value="1.5" type="double"/>
     <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel"/>
-  </node-->
+  </node>
 
 
   <!-- Localization -->
-  <!-->node pkg="amcl" type="amcl" name="amcl" output="screen">
-    <remap from="scan" to="/scan"/>
+  <!--node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <remap from="scan" to="scan"/>
     <param name="odom_frame_id" value="odom"/>
     <param name="odom_model_type" value="diff-corrected"/>
     <param name="base_frame_id" value="chassis"/>
@@ -78,7 +80,7 @@
     <param name="oscillation_distance" value="0.5" />
     <param name="planner_patience" value="1" />
     <param name="controller_patience" value="1" /> 
-    <remap from="cmd_vel" to="mobile_base/commands/velocity"/>
+    <remap from="cmd_vel" to="cmd_vel"/>
     <param name="recovery_behavior_enabled" value="false" />
     <rosparam file="$(find pulsefire_description)/maps/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find pulsefire_description)/maps/costmap_common_params.yaml" command="load" ns="local_costmap" />
@@ -87,11 +89,11 @@
     <rosparam file="$(find pulsefire_description)/maps/base_local_planner_params.yaml" command="load" />  
     <param name="global_costmap/global_frame" value="map"/>
     <param name="global_costmap/robot_base_frame" value="chassis"/>
-    <param name="global_costmap/laser_scan_sensor/sensor_frame" value="scan"/>
+    <param name="global_costmap/laser_scan_sensor/sensor_frame" value="hokuyo"/>
     <param name="global_costmap/laser_scan_sensor/topic" value="scan"/>    
     <param name="local_costmap/global_frame" value="odom"/>
     <param name="local_costmap/robot_base_frame" value="chassis"/>
-    <param name="local_costmap/laser_scan_sensor/sensor_frame" value="scan"/>
+    <param name="local_costmap/laser_scan_sensor/sensor_frame" value="hokuyo"/>
     <param name="local_costmap/laser_scan_sensor/topic" value="scan"/>
     <param name="local_costmap/obstacle_layer/laser_scan_sensor/topic" value="scan"/>
   </node>

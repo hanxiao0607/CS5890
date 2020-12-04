@@ -117,13 +117,10 @@ add_message_files(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 
-file(GLOB python_scripts_DIR
-    "scripts/*.py"
-)
 
-catkin_python_setup()
-catkin_install_python(PROGRAMS ${python_scripts_DIR}
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+# catkin_python_setup()
+# catkin_install_python(PROGRAMS ${python_scripts_DIR}
+#  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 generate_messages(
   DEPENDENCIES
