@@ -1,4 +1,4 @@
-image: /home/dev/Desktop/URDF/src/pulsefire_description/maps/test_map.pgm
+image: /home/dev/Desktop/CS5890/src/pulsefire_description/maps/test_map.pgm
 resolution: 0.050000
 origin: [-1.000000, -15.400000, 0.000000]
 negate: 0

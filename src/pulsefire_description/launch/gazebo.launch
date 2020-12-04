@@ -17,9 +17,8 @@
   <node name="pulsefire_spawner" pkg="gazebo_ros" type="spawn_model" output="screen"
           args="-x 0 -y 0 -z 0 -urdf -param robot_description -model pulsefire" />
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
-    <param name="use_gui" value="False"/>
-  </node>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
 </launch>
