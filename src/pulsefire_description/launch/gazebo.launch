@@ -15,10 +15,14 @@
   <!--command="cat '$(find pulsefire_description)/urdf/pulsefire.xacro'" /-->
     
   <node name="pulsefire_spawner" pkg="gazebo_ros" type="spawn_model" output="screen"
-          args="-x 0 -y 0 -z 0 -urdf -param robot_description -model pulsefire" />
+          args="-x 0 -y 0 -z 0 -urdf -param robot_description -model pulsefire" respawn="false"/>
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+    <param name="use_tf_static" type="bool" value="false" />
+    <param name="tf_prefix" type="string" value="pulsefire"/>
+  </node>
 
 </launch>
